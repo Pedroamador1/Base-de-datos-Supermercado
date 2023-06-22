@@ -9,6 +9,8 @@ import datetime
 from datetime import datetime
 import matplotlib.pyplot as plt
 # pip install xlrd para leer excel
+# pip install scikit-learn para el modelo de predicción
+# pip install sklearn
 ######  Exploración de datos
 
 df = pd.read_excel('Sample_Superstore.xls')
@@ -166,3 +168,29 @@ df8 = df8[0:5]
 # axs[0].set_title('Sales Vs Profit')
 # plt.show()
 
+df_serie_temp=df[['Order Date','Year','Month','Quantity','Discount','Profit','Sales']]
+df_serie_temp=df_serie_temp.sort_values(by=['Order Date'])
+df_serie_temp.reset_index(inplace=True, drop=True)
+df_serie_temp=df_serie_temp.groupby(['Order Date']).mean().reset_index()
+print(df_serie_temp)
+print(365*4)
+
+year = np.array([2014,2015,2016,2017],float)
+month = np.linspace(1,12,12)
+print(month)
+for i in year:
+    for j in month:
+        df_serie_temp_14 = df_serie_temp[df_serie_temp['Year']==i]
+        df_serie_temp_14 = df_serie_temp_14[df_serie_temp_14['Month']==j]
+        print(i,j)
+        print(df_serie_temp_14.shape[0])
+
+
+from sklearn.model_selection import train_test_split
+
+# Split the dataset in an 75/25 train/test ratio. 
+train, test = train_test_split(df_serie_temp, test_size=0.25, random_state=10)
+
+print(train['Order Date'])
+print("Train size:", train.shape[0])
+print("Test size:", test.shape[0])
