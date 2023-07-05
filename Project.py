@@ -11,6 +11,10 @@ import matplotlib.pyplot as plt
 # pip install xlrd para leer excel
 # pip install scikit-learn para el modelo de predicción
 # pip install sklearn
+# pip install lightgbm
+# pip install skforecast
+# pip install statsmodels
+# pip install jinja2
 ######  Exploración de datos
 
 df = pd.read_excel('Sample_Superstore.xls')
@@ -194,3 +198,6 @@ train, test = train_test_split(df_serie_temp, test_size=0.25, random_state=10)
 print(train['Order Date'])
 print("Train size:", train.shape[0])
 print("Test size:", test.shape[0])
+
+###
+
